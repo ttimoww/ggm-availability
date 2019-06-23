@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
 router.use(express.json());
-const mongoose = require('mongoose');
 const User = require('./../models/User');
 const bcrypt = require('bcrypt');
 
 
 router.post('/login', (req, res) => {
-    User.find({email: req.body.email}, (err, docs) => {
-        if (docs.length){
-            bcrypt.compare(req.body.password, docs[0].password, (err, valid) => {
+    User.findOne({email: req.body.email}, (err, user) => {
+        if (user){
+            bcrypt.compare(req.body.password, user.password, (err, valid) => {
                 if (valid){
+                    req.session.userID = user._id;
                     res.status('200');
                     res.json({message: 'Succesfully loged in!'})
                 } if (!valid){

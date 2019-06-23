@@ -1,5 +1,5 @@
 import React from 'react';
-import {Switch, Route, Link} from 'react-router-dom';
+import {Switch, Route} from 'react-router-dom';
 import Homepage from './pages/homepage/Homepage';
 import Dashboard from './pages/dashboard/Dashboard';
 import PageNotFound from './pages/pageNotFound/PageNotFound';
@@ -9,12 +9,6 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {  }
-  }
-
-  componentWillMount(){
-    fetch('/api/test')
-    .then(resp => resp.json())
-    .then(data => console.log(data))
   }
 
   render() { 

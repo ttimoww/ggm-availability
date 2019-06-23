@@ -16,6 +16,8 @@ class Homepage extends Component {
 
     handleLoginSubmit = e => {
         e.preventDefault();
+        this.setState({loginErrorMessage: null});
+        
         const body = {
             email: this.state.email,
             password: this.state.password
