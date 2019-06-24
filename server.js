@@ -33,4 +33,7 @@ app.use('/api', logout);
 const userInfo = require('./controls/userInfo');
 app.use('/api', userInfo);
 
+const isAuthenticated = require('./controls/isAuthenticated');
+app.use('/api', isAuthenticated);
+
 app.listen('9090', () => console.log('Server is listening on port :9090'))

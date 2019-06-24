@@ -6,6 +6,16 @@ class Homepage extends Component {
         this.state = {  }
     }
 
+    checkAuthentication = () => {
+        fetch('/api/isauthenticated')
+        .then(resp => {
+            if (resp.status === 200){
+                let { history } = this.props;
+                history.push({pathname: '/dashboard'})
+            }
+        })
+    }
+
     handleLoginEmail = e =>{
         this.setState({email: e.target.value});
     }
@@ -26,16 +36,12 @@ class Homepage extends Component {
             fetch('/api/login', {
                 method: 'POST', 
                 body: JSON.stringify(body), 
-                headers: {
-                    'Content-Type': 'application/json'
-                }
+                headers: {'Content-Type': 'application/json'}
             })
             .then(resp => {
                 if (resp.status === 200) {
                     let { history } = this.props;
-                    history.push({
-                        pathname: '/dashboard'
-                    })
+                    history.push({pathname: '/dashboard'})
                 } else if (resp.status === 401){
                     this.setState({loginErrorMessage: 'Wrong username or password'})
                 } else{
@@ -45,6 +51,10 @@ class Homepage extends Component {
         }else{
             this.setState({loginErrorMessage: 'Please fill in both field'})
         }
+    }
+
+    componentDidMount = () => {
+        this.checkAuthentication();
     }
 
     render() { 

@@ -1,5 +1,6 @@
 import React from 'react';
-import {Switch, Route} from 'react-router-dom';
+import {Switch, Route, Link} from 'react-router-dom';
+import PrivateRoute from './PrivateRoute';
 import Homepage from './pages/homepage/Homepage';
 import Dashboard from './pages/dashboard/Dashboard';
 import PageNotFound from './pages/pageNotFound/PageNotFound';
@@ -16,7 +17,7 @@ class App extends React.Component {
       <div className="app">
         <Switch>
           <Route exact path="/" component={Homepage} />
-          <Route path="/dashboard" component={Dashboard} />
+          <PrivateRoute path="/dashboard" component={Dashboard} />
           <Route component={PageNotFound} />
         </Switch>
       </div>
